@@ -1,0 +1,13 @@
+{
+    "vsmqtt.brokerProfiles": [
+        {
+            "name": "HiveMQ",
+            "protocol": "mqtts",
+            "host": "97299651548a4c57a3aabb6700e6e882.s2.eu.hivemq.cloud",
+            "port": 8883,
+            "clientId": "vsmqtt_client_2324",
+            "username": "projeto-integrador-v",
+            "password": "univesp001004",
+        }
+    ]
+}

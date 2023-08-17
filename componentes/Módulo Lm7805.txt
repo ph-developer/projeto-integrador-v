@@ -1,0 +1,7 @@
+ESPECIFICAÇÕES:
+
+• Regulador de Tensão: LM7805
+• Dimensões: 5,7 cm x 2,3 cm
+• Tensão de entrada: não polar AC/DC na faixa de 7.5V – 20V
+• Tensão de saída de 5 v
+• Corrente de saída máxima: 1.2A

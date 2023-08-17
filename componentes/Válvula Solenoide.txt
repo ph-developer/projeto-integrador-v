@@ -1,0 +1,10 @@
+ESPECIFICAÇÕES:
+
+Material: Metal + plástico
+Tensão: DC 12 V - 450mA
+Entrada e saída: 1/2" (diâmetro externo)
+Pressão: 0.02-0.8Mpa
+Temperatura máxima do fluido: 100 ° C
+Modo de operação: normalmente fechado
+Tipo de válvula: válvula de diafragma
+Uso: água e fluidos de baixa viscosidade

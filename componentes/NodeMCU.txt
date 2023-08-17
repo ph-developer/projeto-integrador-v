@@ -1,0 +1,17 @@
+ESPECIFICAÇÕES:
+
+- 4MB de Memória FLASH;
+- Módulo NodeMcu Lua ESP-12E;
+- Wireless padrão 802.11 b/g/n;
+- Antena embutida;
+- Conector micro-usb;
+- Modos de operação: Estação conectada ao roteador Wifi/Ponto de Acesso/Estação conectada ao roteador Wifi+Ponto de Acesso;
+- Suporta 5 conexões TCP/IP;
+- Portas GPIO: 10;
+- GPIO com funções de PWM, I2C, SPI, etc;
+- Tensão de operação: 4,5 ~ 9V;
+- Taxa de transferência: 110-460800bps;
+- Suporta Upgrade remoto de firmware;
+- Conversor analógico digital (ADC);
+- Distância entre pinos: 2,54mm;
+- Dimensões: 58 x 30 x 10 mm.

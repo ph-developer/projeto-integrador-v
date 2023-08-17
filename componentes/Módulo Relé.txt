@@ -1,0 +1,9 @@
+ESPECIFICAÇÕES:
+
+Tensão de operação: 5VDC;
+Permite controlar cargas de 220V AC;
+Corrente típica de operação: 15~20mA;
+LED indicador de status;
+Pinagem: Normal Aberto, Normal Fechado e Comum;
+Tensão de saída: (30 VDC a 10A) ou (250VAC a 10A);
+Tempo de resposta: 5~10ms.

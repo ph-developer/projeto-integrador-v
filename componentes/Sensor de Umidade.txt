@@ -1,0 +1,16 @@
+ESPECIFICAÇÕES:
+
+- Sensor de umidade do solo;
+- Sensibilidade ajustável;
+- Interface Analógica: AO;
+- Interface Digital: DO (0 e 1);
+- Compatível com Arduino, PIC, AVR, ARM, etc;
+- Acompanha jumper fêmea-fêmea.
+
+- Interface (4 fios): VCC/GND/DO/AO;
+- Tensão de funcionamento: 3.3V ~ 5V;
+- Dimensão do sensor com sondas (CxL): 60x20mm;
+- Dimensão do circuito com trimpot (CxL): 32x14mm;
+- Peso total: 9g.
+
+- Sonda de umidade + Módulo comparador
