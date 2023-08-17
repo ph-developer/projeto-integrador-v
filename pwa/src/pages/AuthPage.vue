@@ -13,7 +13,8 @@ const autenticar = () => {
 
 <template>
   <q-page class="column justify-center text-center">
-    <q-img class="self-center q-mb-md" src="../assets/logo.png" height="60px" width="60px" />
+    <q-img class="self-center q-mb-md" src="../assets/logo_univesp.png" height="60px" width="60px"
+    />
 
     <span class="text-bold font-24">Irrigação Automatizada</span>
     <span class="font-18">Projeto Integrador V</span>
