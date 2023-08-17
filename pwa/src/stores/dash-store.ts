@@ -20,7 +20,9 @@ export const useDashStore = defineStore('dash', () => {
     const client = connectMqtt(url, options);
 
     client.on('connect', () => {
-      mqttConectado.value = true;
+      setTimeout(() => {
+        mqttConectado.value = true;
+      }, 1000);
     });
     client.on('error', () => {
       globalStore.notificarErro('Ocorreu um erro ao tentar conectar ao servidor.');
@@ -38,7 +40,6 @@ export const useDashStore = defineStore('dash', () => {
     client.subscribe('pi_v/umidade_atual');
 
     mqttClient.value = client;
-    mqttConectado.value = true;
   };
 
   const desconectarMqtt = async () => {

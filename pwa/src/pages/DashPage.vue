@@ -4,11 +4,7 @@ import { computed, onMounted, onUnmounted } from 'vue';
 
 const dashStore = useDashStore();
 
-const carregando = computed(
-  () => !dashStore.mqttConectado
-    || dashStore.umidadeAtual == null
-    || dashStore.statusIrrigacao == null,
-);
+const carregando = computed(() => !dashStore.mqttConectado);
 const statusIrrigacao = computed(() => dashStore.statusIrrigacao);
 const umidadeAtual = computed(() => dashStore.umidadeAtual);
 
@@ -43,6 +39,8 @@ onUnmounted(() => {
   </q-page>
 
   <q-page v-else class="column items-center justify-center">
+    <span class="text-bold">Sensor 001004</span>
+
     <q-knob
       readonly
       v-model="umidadeAtual"
@@ -55,11 +53,14 @@ onUnmounted(() => {
     >
       <div class="column items-center">
         <span class="font-14 text-bold">Umidade</span>
-        {{umidadeAtual}}%
+        <span v-if="umidadeAtual != null">{{umidadeAtual}}%</span>
+        <span v-else class="font-14 text-bold q-pt-md">...</span>
       </div>
     </q-knob>
 
-    <span class="text-bold">Irrigação {{ statusIrrigacao ? 'Ligada' : 'Desligada' }}</span>
+    <span class="text-bold" v-if="statusIrrigacao == null">...</span>
+    <span class="text-bold" v-else-if="statusIrrigacao">Irrigação Ligada</span>
+    <span class="text-bold" v-else>Irrigação Desligada</span>
 
     <q-btn @click="irrigacaoManual" color="primary" label="Iniciar Irrigação" class="q-mt-sm"
            :disable="!!statusIrrigacao" />
