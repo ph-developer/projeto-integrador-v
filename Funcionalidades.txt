@@ -1,9 +1,0 @@
-IRRIGAÇÃO AUTOMÁTICA:
-A umidade do solo é medida a cada uma hora.
-Caso seja verificada uma umidade abaixo de 70% é iniciado o processo de irrigação.
-O tempo do processo de irrigação é de 30 segundos.
-
-IRRIGAÇÃO MANUAL:
-É possível iniciar o processo de irrigação através do aplicativo android.
-
-É possível verificar a umidade do solo através do aplicativo android.
