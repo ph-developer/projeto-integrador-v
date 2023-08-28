@@ -5,27 +5,22 @@ Turma 001 - Grupo 004.
 
 <!--  -->
 
-## Funcionamento da Aplicação
+## Sobre a Aplicação
 
 Através da aplicação PWA o usuário verifica a umidade atual e o estado da irrigação, ouvindo os tópicos do Broker MQTT.
 
 É possível através da aplicação acionar a irrigação, a qual será solicitada ao Broker MQTT.
-
-<!--  -->
-
-## Sobre a Aplicação
-
-Todo o código da aplicação PWA está nesta pasta. As capturas de tela da aplicação encontram-se na pasta *docs/prints*.
-
-A aplicação está hospedada através do Firebase em https://irrigacao-pi-v.web.app.
-
-A aplicação foi desenvolvida em *Typescript + Vue*, através do Framework *Quasar*.
 
 O usuário pode acessar as informações do sistema utilizando-se de usuário e senha, os quais, para o intuito de testes ou
 demonstração do sistema, foi disponibilizado o usuário *teste* com senha *teste*.
 
 O usuário tem a possibilidade de cadastrar, editar e/ou excluir os sensores cadastrados em seu perfil, sendo que cada
 usuário possui seus próprios sensores cadastrados.
+
+Todo o código da aplicação PWA está nesta pasta. As capturas de tela da aplicação encontram-se na pasta *docs/prints*.
+
+A aplicação foi desenvolvida em *Typescript + Vue*, através do Framework *Quasar* e está hospedada
+através do Firebase em https://irrigacao-pi-v.web.app.
 
 <!--  -->
 
