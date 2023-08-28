@@ -2,13 +2,15 @@
 
 Aplicação Web/Mobile (PWA) de irrigação automatizada, para atendimento ao Projeto Integrador em Computação V (UNIVESP) - Turma 001 - Grupo 004.
 
+### <span style="color:red;">Estou alterando o tópico padrão de /pi_v/irrigacao_manual para /pi_v/acionar_irrigacao, creio que fica mais semântico para a funcionalidade do tópico.</span>
+
 <!--  -->
 
 ## Funcionamento da Aplicação
 
 Através da aplicação PWA o usuário verifica a umidade atual e o status da irrigação, ouvindo os tópicos do Broker MQTT.
 
-É possível através da aplicação iniciar uma irrigação manual, a qual será solicitada ao Broker MQTT.
+É possível através da aplicação acionar uma irrigação, a qual será solicitada ao Broker MQTT.
 
 <!--  -->
 
