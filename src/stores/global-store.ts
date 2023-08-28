@@ -2,17 +2,17 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useGlobalStore = defineStore('global', () => {
-  const mensagemErro = ref<string|null>(null);
+  const errorMessage = ref<string|null>(null);
 
-  const notificarErro = (mensagem: string) => {
-    mensagemErro.value = mensagem;
+  const notifyError = (message: string) => {
+    errorMessage.value = message;
     setTimeout(() => {
-      mensagemErro.value = null;
+      errorMessage.value = null;
     }, 100);
   };
 
   return {
-    mensagemErro,
-    notificarErro,
+    errorMessage,
+    notifyError,
   };
 });

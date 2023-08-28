@@ -1,63 +1,100 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
-import { useGlobalStore } from 'stores/global-store';
-import { IClientOptions, MqttClient, connect as connectMqtt } from 'mqtt';
+import { computed, ref } from 'vue';
+import { useMqttStore } from 'stores/mqtt-store';
+import { useAuthStore } from 'stores/auth-store';
+import { useFirebase } from 'boot/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import { Sensor } from './types/sensor';
 
 export const useDashStore = defineStore('dash', () => {
-  const globalStore = useGlobalStore();
+  const firebase = useFirebase();
+  const mqttStore = useMqttStore();
+  const authStore = useAuthStore();
 
-  const mqttClient = ref<MqttClient|null>(null);
-  const mqttConectado = ref<boolean>(false);
-  const statusIrrigacao = ref<boolean|null>(null);
-  const umidadeAtual = ref<number|null>(null);
+  const isLoading = ref(false);
+  const sensors = ref<Sensor[]>([]);
+  const hasSensors = computed(() => sensors.value.length > 0);
 
-  const conectarMqtt = async () => {
-    const url = 'wss://97299651548a4c57a3aabb6700e6e882.s2.eu.hivemq.cloud:8884/mqtt';
-    const options: IClientOptions = {
-      username: 'projeto-integrador-v',
-      password: 'univesp001004',
-    };
-    const client = connectMqtt(url, options);
+  const isConnectingSensor = computed(() => !mqttStore.mqttIsConnected);
+  const currentSensorIndex = ref(0);
+  const currentSensor = computed<Sensor | null>(
+    () => sensors.value[currentSensorIndex.value] || null,
+  );
 
-    client.on('connect', () => {
-      setTimeout(() => {
-        mqttConectado.value = true;
-      }, 1000);
-    });
-    client.on('error', () => {
-      globalStore.notificarErro('Ocorreu um erro ao tentar conectar ao servidor.');
-    });
-    client.on('message', (topic, message) => {
-      if (topic === 'pi_v/status_irrigacao') {
-        statusIrrigacao.value = message.toString() === 'true';
-      }
-      if (topic === 'pi_v/umidade_atual') {
-        umidadeAtual.value = parseInt(message.toString(), 10);
-      }
-    });
-
-    client.subscribe('pi_v/status_irrigacao');
-    client.subscribe('pi_v/umidade_atual');
-
-    mqttClient.value = client;
+  const connectCurrentSensor = async () => {
+    await mqttStore.disconnectMqtt();
+    if (currentSensor.value != null) await mqttStore.connectMqtt(currentSensor.value);
   };
 
-  const desconectarMqtt = async () => {
-    mqttClient.value?.end();
-    mqttClient.value = null;
-    mqttConectado.value = false;
+  const loadSensors = async () => {
+    isLoading.value = true;
+    sensors.value = [];
+
+    const currentUserId = authStore.currentUser?.id || null;
+    if (currentUserId === null) return;
+
+    const db = firebase.db();
+    const sensorsRef = collection(db, `users/${currentUserId}/sensors`);
+    const snapshot = await getDocs(sensorsRef);
+
+    if (!snapshot.empty) {
+      sensors.value = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        name: doc.data().name,
+        topicTriggerIrrigation: doc.data().topicTriggerIrrigation,
+        topicCurrentHumidity: doc.data().topicCurrentHumidity,
+        topicIrrigationStatus: doc.data().topicIrrigationStatus,
+      }));
+    }
+
+    if (currentSensorIndex.value > sensors.value.length - 1) {
+      currentSensorIndex.value = sensors.value.length - 1;
+    }
+
+    isLoading.value = false;
+
+    connectCurrentSensor();
   };
 
-  const irrigacaoManual = async () => {
-    mqttClient.value?.publish('pi_v/irrigacao_manual', 'true');
+  const hasPreviousSensor = computed(
+    () => currentSensorIndex.value > 0,
+  );
+  const goToPreviousSensor = () => {
+    if (hasPreviousSensor.value) {
+      currentSensorIndex.value -= 1;
+      connectCurrentSensor();
+    }
+  };
+  const hasNextSensor = computed(
+    () => sensors.value !== null && currentSensorIndex.value < sensors.value.length - 1,
+  );
+  const goToNextSensor = () => {
+    if (hasNextSensor.value) {
+      currentSensorIndex.value += 1;
+      connectCurrentSensor();
+    }
+  };
+
+  const currentHumidity = computed(() => mqttStore.currentHumidity);
+  const irrigationStatus = computed(() => mqttStore.irrigationStatus);
+  const triggerIrrigation = async () => {
+    if (currentSensor.value != null) {
+      await mqttStore.triggerIrrigation(currentSensor.value);
+    }
   };
 
   return {
-    mqttConectado,
-    statusIrrigacao,
-    umidadeAtual,
-    conectarMqtt,
-    desconectarMqtt,
-    irrigacaoManual,
+    hasSensors,
+    currentSensor,
+    isLoading,
+    isConnectingSensor,
+    loadSensors,
+    hasPreviousSensor,
+    goToPreviousSensor,
+    hasNextSensor,
+    goToNextSensor,
+    currentHumidity,
+    irrigationStatus,
+    triggerIrrigation,
   };
 });

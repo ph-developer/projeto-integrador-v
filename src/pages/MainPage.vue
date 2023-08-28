@@ -10,26 +10,27 @@ const $q = useQuasar();
 const globalStore = useGlobalStore();
 const authStore = useAuthStore();
 
-const mensagemErro = computed(() => globalStore.mensagemErro);
+const errorMessage = computed(() => globalStore.errorMessage);
 
-watch(mensagemErro, (mensagem) => {
-  if (mensagem != null) {
+watch(errorMessage, (message) => {
+  if (message !== null) {
     $q.notify({
       type: 'negative',
-      message: mensagem,
+      message,
       progress: true,
+      timeout: 3000,
     });
   }
 });
 
-const autenticado = computed(() => authStore.autenticado);
+const isLoggedIn = computed(() => authStore.currentUser !== null);
 </script>
 
 <template>
   <q-layout view="hHh lpR fFf">
     <q-page-container>
-      <DashPage v-if="autenticado" />
-      <AuthPage v-else />
+      <DashPage v-if="isLoggedIn"/>
+      <AuthPage v-else/>
     </q-page-container>
   </q-layout>
 </template>

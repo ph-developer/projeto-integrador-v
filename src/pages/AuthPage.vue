@@ -4,24 +4,28 @@ import { ref } from 'vue';
 
 const authStore = useAuthStore();
 
-const senha = ref('');
+const username = ref('');
+const password = ref('');
 
-const autenticar = () => {
-  authStore.autenticar(senha.value);
+const doLogin = () => {
+  authStore.doLogin(username.value, password.value);
 };
 </script>
 
 <template>
   <q-page class="column justify-center text-center">
-    <q-img class="self-center q-mb-md" src="../assets/logo.png" height="60px" width="60px"/>
+    <q-img class="self-center q-mb-md" src="../assets/logo.png" height="60px" width="60px" />
 
     <span class="text-bold font-24">Sistema de</span>
     <span class="text-bold font-24">Irrigação Automatizada</span>
 
-    <form @submit.prevent="autenticar" class="q-mt-md q-mx-auto">
-      <q-input outlined v-model="senha" label="Token" dense stack-label autofocus />
+    <form @submit.prevent="doLogin" class="q-mt-md q-mx-auto">
+      <q-input outlined v-model="username" label="Usuário" dense stack-label autofocus />
 
-      <q-btn color="primary" type="submit" label="Entrar" class="q-mt-sm" stretch/>
+      <q-input type="password" class="q-mt-sm" outlined v-model="password" label="Senha" dense
+               stack-label />
+
+      <q-btn color="primary" type="submit" label="Entrar" class="q-mt-sm" stretch />
     </form>
 
     <q-footer class="bg-transparent text-black font-12">
@@ -31,15 +35,3 @@ const autenticar = () => {
     </q-footer>
   </q-page>
 </template>
-
-<style lang="scss" scoped>
-.font-24 {
-  font-size: 24px;
-}
-.font-12 {
-  font-size: 12px;
-}
-.mw-250 {
-  max-width: 250px;
-}
-</style>

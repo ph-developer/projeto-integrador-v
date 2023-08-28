@@ -1,6 +1,6 @@
 {
   "name": "projeto-integrador-v",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Sistema de Irrigação Automatizada.",
   "productName": "Sistema de Irrigação Automatizada - PI-V",
   "author": "ph <raphaelcr.ads@gmail.com>",
@@ -14,6 +14,7 @@
   "dependencies": {
     "@quasar/extras": "^1.16.4",
     "core-js": "^3.6.5",
+    "firebase": "^10.3.0",
     "mqtt": "^5.0.2",
     "pinia": "^2.0.11",
     "quasar": "^2.6.0",
