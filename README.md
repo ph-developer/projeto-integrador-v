@@ -6,7 +6,7 @@ Aplicação Web/Mobile (PWA) de irrigação automatizada, para atendimento ao Pr
 
 ## Funcionamento da Aplicação
 
-Através da aplicação PWA o usuário verifica a umidade atual e o status da irrigação, ouvindos os tópicos do Broker MQTT.
+Através da aplicação PWA o usuário verifica a umidade atual e o status da irrigação, ouvindo os tópicos do Broker MQTT.
 
 É possível através da aplicação iniciar uma irrigação manual, a qual será solicitada ao Broker MQTT.
 
@@ -45,14 +45,14 @@ Para testes, foi utilizado o seguinte host *97299651548a4c57a3aabb6700e6e882.s2.
 Tópicos utilizados:
 - */pi_v/umidade_atual*: Tópico em que a aplicação escuta o percentual de umidade do solo. (valor inteiro)
 - */pi_v/status_irrigacao*: Tópico em que a aplicação escuta o status da irrigação. (valor booleano)
-- */pi_v/irrigacao_manual*: Tópico em que a aplicação PWA envia uma solicitação de irrigação. (valor booleano)
+- */pi_v/acionar_irrigacao*: Tópico em que a aplicação PWA envia uma solicitação de irrigação. (valor booleano)
 
 <!--  -->
 
 ## Implementações Pendentes
 
 - [ ] Implementar um sistema de autenticação baseado em usuário e senha, removendo a forma de autenticação atual (token de acesso).
-- [ ] Implementar um painel admin para configuração dos usuários e conexões com os dispositivos IoT.
+- [ ] Implementar adição, remoção e edição dos sensores.
 
 <!--  -->
 
