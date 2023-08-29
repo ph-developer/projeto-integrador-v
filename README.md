@@ -59,6 +59,7 @@ Tópicos utilizados para testes:
 
 - [x] Implementar um sistema de autenticação baseado em usuário e senha, removendo a forma de autenticação atual (token
 de acesso).
+- [x] Implementar a função de manter conectado.
 - [ ] Implementar adição, remoção e edição dos sensores.
 
 <!--  -->

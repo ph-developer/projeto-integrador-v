@@ -35,6 +35,7 @@ module.exports = configure((ctx) => ({
   // https://v2.quasar.dev/quasar-cli-webpack/boot-files
   boot: [
     'firebase',
+    'auth',
   ],
 
   // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
@@ -122,6 +123,7 @@ module.exports = configure((ctx) => ({
     // Quasar plugins
     plugins: [
       'Notify',
+      'LocalStorage',
     ],
   },
 
