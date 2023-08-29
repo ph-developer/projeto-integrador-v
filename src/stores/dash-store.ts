@@ -3,7 +3,9 @@ import { computed, ref } from 'vue';
 import { useMqttStore } from 'stores/mqtt-store';
 import { useAuthStore } from 'stores/auth-store';
 import { useFirebase } from 'boot/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import {
+  collection, getDocs, orderBy, query,
+} from 'firebase/firestore';
 import { Sensor } from './types/sensor';
 
 export const useDashStore = defineStore('dash', () => {
@@ -35,7 +37,8 @@ export const useDashStore = defineStore('dash', () => {
 
     const db = firebase.db();
     const sensorsRef = collection(db, `users/${currentUserId}/sensors`);
-    const snapshot = await getDocs(sensorsRef);
+    const q = query(sensorsRef, orderBy('name'));
+    const snapshot = await getDocs(q);
 
     if (!snapshot.empty) {
       sensors.value = snapshot.docs.map((doc) => ({
@@ -52,8 +55,6 @@ export const useDashStore = defineStore('dash', () => {
     }
 
     isLoading.value = false;
-
-    connectCurrentSensor();
   };
 
   const hasPreviousSensor = computed(
@@ -71,6 +72,16 @@ export const useDashStore = defineStore('dash', () => {
   const goToNextSensor = () => {
     if (hasNextSensor.value) {
       currentSensorIndex.value += 1;
+      connectCurrentSensor();
+    }
+  };
+
+  const goToSensorId = (sensorId: string) => {
+    if (sensors.value.length > 0) {
+      const sensorIndex = sensors.value.findIndex(
+        (sensor) => sensor.id === sensorId,
+      );
+      if (sensorIndex >= 0) currentSensorIndex.value = sensorIndex;
       connectCurrentSensor();
     }
   };
@@ -93,8 +104,10 @@ export const useDashStore = defineStore('dash', () => {
     goToPreviousSensor,
     hasNextSensor,
     goToNextSensor,
+    goToSensorId,
     currentHumidity,
     irrigationStatus,
     triggerIrrigation,
+    connectCurrentSensor,
   };
 });

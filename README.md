@@ -37,7 +37,8 @@ aplicativos nativos e da web. É como um site feito usando tecnologias da web, m
 na plataforma android como um aplicativo, através do chrome.
 - *Firebase*: Plataforma BaaS. Conjunto de serviços de computação em nuvem de back-end e plataformas de desenvolvimento
 de aplicativos fornecidos pelo Google. Ele hospeda bancos de dados, serviços, autenticação e integração para uma
-variedade de aplicativos. Neste projeto, o PWA foi hospedado no Firebase. (https://firebase.google.com/?hl=pt)
+variedade de aplicativos. Neste projeto, o PWA foi hospedado no Firebase. Também, o foi utilizado o banco de dados e
+autenticação provenientes do Firebase. (https://firebase.google.com/?hl=pt)
 
 <!--  -->
 
@@ -60,7 +61,8 @@ Tópicos utilizados para testes:
 - [x] Implementar um sistema de autenticação baseado em usuário e senha, removendo a forma de autenticação atual (token
 de acesso).
 - [x] Implementar a função de manter conectado.
-- [ ] Implementar adição, remoção e edição dos sensores.
+- [x] Implementar adição, remoção e edição dos sensores.
+- [ ] Refatorar a forma de conexão ao mqtt, para correção de um bug na troca entre sensores.
 
 <!--  -->
 

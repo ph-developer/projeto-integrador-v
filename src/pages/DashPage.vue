@@ -2,9 +2,11 @@
 import { useAuthStore } from 'src/stores/auth-store';
 import { useDashStore } from 'stores/dash-store';
 import { computed, onBeforeMount } from 'vue';
+import { useSensorEditStore } from 'stores/sensor-edit-store';
 
 const authStore = useAuthStore();
 const dashStore = useDashStore();
+const sensorEditStore = useSensorEditStore();
 
 const humidityIndicatorColor = computed(() => {
   if (dashStore.currentHumidity == null) return 'gray';
@@ -16,9 +18,18 @@ const humidityIndicatorColor = computed(() => {
   return 'green';
 });
 
-onBeforeMount(() => {
-  dashStore.loadSensors();
+onBeforeMount(async () => {
+  await dashStore.loadSensors();
+  await dashStore.connectCurrentSensor();
 });
+
+const onEditSensorClick = () => {
+  sensorEditStore.showDialog(dashStore.currentSensor);
+};
+
+const onNewSensorClick = () => {
+  sensorEditStore.showDialog(null);
+};
 </script>
 
 <template>
@@ -32,10 +43,10 @@ onBeforeMount(() => {
       <q-btn color="primary" flat rounded icon="more_vert" class="q-mr-auto">
         <q-menu>
           <q-list>
-            <q-item clickable v-close-popup>
+            <q-item clickable v-close-popup v-if="dashStore.hasSensors" @click="onEditSensorClick">
               <q-item-section>Editar Sensor</q-item-section>
             </q-item>
-            <q-item clickable v-close-popup>
+            <q-item clickable v-close-popup @click="onNewSensorClick">
               <q-item-section>Adicionar Sensor</q-item-section>
             </q-item>
           </q-list>
