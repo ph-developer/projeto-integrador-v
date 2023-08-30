@@ -56,16 +56,6 @@ Tópicos utilizados para testes:
 
 <!--  -->
 
-## Implementações Pendentes
-
-- [x] Implementar um sistema de autenticação baseado em usuário e senha, removendo a forma de autenticação atual (token
-de acesso).
-- [x] Implementar a função de manter conectado.
-- [x] Implementar adição, remoção e edição dos sensores.
-- [ ] Refatorar a forma de conexão ao mqtt, para correção de um bug na troca entre sensores.
-
-<!--  -->
-
 ## Referencias Bibliográficas
 
 - VUE.JS 3.0. Documentação | Introdução. Disponível em: https://pt.vuejs.org/guide/introduction.html. Acesso em: 20 ago. 2023.
