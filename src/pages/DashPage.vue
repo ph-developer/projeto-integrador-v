@@ -75,14 +75,21 @@ const onNewSensorClick = () => {
     </div>
 
     <div v-else class="column items-center justify-center">
-      <q-knob readonly :model-value="dashStore.currentHumidity as number" show-value size="150px"
-              :thickness="0.22" :color="humidityIndicatorColor"
+      <q-knob v-if="dashStore.currentHumidity === null" readonly :model-value="-1" show-value
+              size="150px" :thickness="0.22" color="black" class="q-ma-md text-black"
+              track-color="black-3">
+        <div class="column items-center">
+          <span class="font-14 text-bold">Umidade</span>
+          <span class="font-14 text-bold q-pt-md">...</span>
+        </div>
+      </q-knob>
+      <q-knob v-else readonly :model-value="dashStore.currentHumidity as number" show-value
+              size="150px" :thickness="0.22" :color="humidityIndicatorColor"
               :track-color="humidityIndicatorColor + '-3'"
               :class="'q-ma-md text-' + humidityIndicatorColor">
         <div class="column items-center">
           <span class="font-14 text-bold">Umidade</span>
-          <span v-if="dashStore.currentHumidity != null">{{ dashStore.currentHumidity }}%</span>
-          <span v-else class="font-14 text-bold q-pt-md">...</span>
+          <span>{{ dashStore.currentHumidity }}%</span>
         </div>
       </q-knob>
 
