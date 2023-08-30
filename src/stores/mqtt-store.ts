@@ -24,6 +24,7 @@ export const useMqttStore = defineStore('mqtt', () => {
 
     client.on('connect', () => {
       setTimeout(() => {
+        if (currentSensorId.value !== sensor.id) return;
         mqttIsConnected.value = true;
       }, 1000);
     });
@@ -33,9 +34,7 @@ export const useMqttStore = defineStore('mqtt', () => {
       );
     });
     client.on('message', (topic, message) => {
-      if (currentSensorId.value !== sensor.id) {
-        return;
-      }
+      if (currentSensorId.value !== sensor.id) return;
       if (topic === sensor.topicIrrigationStatus) {
         irrigationStatus.value = message.toString() === 'true';
       }
@@ -44,7 +43,8 @@ export const useMqttStore = defineStore('mqtt', () => {
       }
     });
     client.on('disconnect', () => {
-      console.log('dc', sensor.name);
+      // TODO: verificar a desconexão do sensor, aparentemente não está desconectando.
+      // console.log('dc', sensor.name);
     });
 
     client.subscribe(sensor.topicIrrigationStatus);
