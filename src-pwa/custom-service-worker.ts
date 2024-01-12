@@ -8,5 +8,7 @@ declare const self: ServiceWorkerGlobalScope & typeof globalThis;
 
 import { precacheAndRoute } from 'workbox-precaching';
 
+const LATEST_VERSION = 'v1.2.4';
+
 // Use with precache injection
-precacheAndRoute(self.__WB_MANIFEST);
+// precacheAndRoute(self.__WB_MANIFEST);
